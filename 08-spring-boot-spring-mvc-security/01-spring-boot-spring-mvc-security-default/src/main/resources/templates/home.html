@@ -22,6 +22,21 @@
     <br>
     <br>
 
+    <!-- Add a link to manager meeting -only managers -->
+    <a th:href="@{/managers}">
+        <div style="font-family: 'Times New Roman',serif">
+            Leadership Meeting
+        </div>
+    </a>
+
+    <br> <br>
+
+    <!-- Add a link to admin event -only admins -->
+
+    <a th:href="@{/admins}" style="font-family: 'Times New Roman',serif">Admins Event</a>
+
+    <hr> <hr>
+
     <form action="#" th:action="@{/logout}" method="post">
         <input type="submit" value="Logout" />
     </form>
