@@ -11,7 +11,6 @@
     <br><br>
     Role(s): <span style="font: bold 16px sans-serif"
                    sec:authentication="principal.authorities"></span>
-
     <hr>
 
     <h2>Company Home Page</h2>
@@ -20,22 +19,28 @@
     <strong>Welcome</strong> to Yusuf's company <em>home page</em>!
 
     <br>
-    <br>
 
     <!-- Add a link to manager meeting -only managers -->
-    <a th:href="@{/managers}">
-        <div style="font-family: 'Times New Roman',serif">
-            Leadership Meeting
-        </div>
-    </a>
+    <div sec:authorize="hasRole('MANAGER')">
+        <hr>
+        <a th:href="@{/managers}">
+            <div style="font-family: 'Times New Roman',serif">
+                >>> Leadership Meeting
+            </div>
+        </a>
+    </div>
 
-    <br> <br>
+
 
     <!-- Add a link to admin event -only admins -->
+    <div sec:authorize="hasRole('ADMIN')">
+        <hr>
+        <a th:href="@{/admins}" style="font-family: 'Times New Roman',serif">
+            >>> Admins Event</a>
+    </div>
 
-    <a th:href="@{/admins}" style="font-family: 'Times New Roman',serif">Admins Event</a>
-
-    <hr> <hr>
+    <hr>
+    <br>
 
     <form action="#" th:action="@{/logout}" method="post">
         <input type="submit" value="Logout" />
