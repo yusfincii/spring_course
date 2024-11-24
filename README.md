@@ -4,5 +4,6 @@ Using:
 -  Java
 -  SpringBoot
 -  JPA - Hibernate - Rest CRUD - MVC - MVC Security
+-  MySQL
 -  Thymeleaf
 -  HTML - CSS - Bootstrap
