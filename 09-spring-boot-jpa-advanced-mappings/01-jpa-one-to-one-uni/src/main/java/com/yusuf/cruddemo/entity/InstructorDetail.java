@@ -17,6 +17,19 @@ public class InstructorDetail {
     @Column(name = "hobby")
     private String hobby;
 
+    @OneToOne(mappedBy = "instructorDetail",
+            cascade = {CascadeType.DETACH, CascadeType.MERGE,
+                    CascadeType.PERSIST, CascadeType.REFRESH})
+    private Instructor instructor;
+
+    public Instructor getInstructor() {
+        return instructor;
+    }
+
+    public void setInstructor(Instructor instructor) {
+        this.instructor = instructor;
+    }
+
     public InstructorDetail(){}
 
     public InstructorDetail(String youtube_channel, String hobby) {

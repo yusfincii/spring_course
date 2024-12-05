@@ -18,10 +18,31 @@ public class CruddemoApplication {
 	@Bean
 	public CommandLineRunner commandLineRunner(AppDAO appDAO){
 		return runner -> {
-			// createInstructor(appDAO);
+			//createInstructor(appDAO);
 			//findInstructor(appDAO);
 			//deleteInstructor(appDAO);
+			//findInstructorDetail(appDAO);
+			deleteInstructorDetail(appDAO);
+
 		};
+	}
+
+	private void deleteInstructorDetail(AppDAO appDAO) {
+		int theId = 3;
+		System.out.println("deleting instructor detail: " + theId);
+		appDAO.deleteInstructorDetailById(theId);
+	}
+
+	private void findInstructorDetail(AppDAO appDAO) {
+		int theId = 2;
+
+		//  get instructor detail object
+		InstructorDetail instructorDetail  = appDAO.findInstructorDetailById(theId);
+
+		System.out.println("Instructor Detail : " + instructorDetail);
+
+		// associated instructor
+		System.out.println("Associated instructor: " + instructorDetail.getInstructor());
 	}
 
 	private void deleteInstructor(AppDAO appDAO){
@@ -41,25 +62,25 @@ public class CruddemoApplication {
 	}
 
 	private void createInstructor(AppDAO appDAO) {
-		/*
-		Instructor instructor = new Instructor("Yusuf", "INCI",
+
+		Instructor instructor1 = new Instructor("Yusuf", "INCI",
 				"ysfnc27@gmail.com");
-		InstructorDetail instructorDetail = new InstructorDetail("yoyusux",
+		InstructorDetail instructorDetail1 = new InstructorDetail("yoyusux",
 				"ski");
 		// associate the objects
-		instructor.setInstructor_detail_id(instructorDetail);
-		 */
-		Instructor instructor = new Instructor("Yusuf2", "INCI",
+		instructor1.setInstructorDetail(instructorDetail1);
+
+		Instructor instructor2 = new Instructor("Yusuf2", "INCI",
 				"ysfnc27@gmail.com");
-		InstructorDetail instructorDetail = new InstructorDetail("yoyusux2",
+		InstructorDetail instructorDetail2 = new InstructorDetail("yoyusux2",
 				"football");
 		// associate the objects
-		instructor.setInstructor_detail_id(instructorDetail);
+		instructor2.setInstructorDetail(instructorDetail2);
 
 		// this will also save the details object
 		// because of CascadeType.ALL
-		System.out.println("Saving instructor: " + instructor);
-		appDAO.save(instructor);
+		System.out.println("Saving instructor: " + instructor1);
+		appDAO.save(instructor2);
 		System.out.println("Done.");
 	}
 }
