@@ -64,7 +64,7 @@ public class Instructor {
         this.email = email;
     }
 
-    public InstructorDetail getInstructor_detail_id() {
+    public InstructorDetail getInstructorDetail() {
         return instructor_detail_id;
     }
 
