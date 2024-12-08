@@ -1,9 +1,14 @@
 package com.yusuf.cruddemo.entity;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.sql.results.graph.collection.internal.EagerCollectionFetch;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.data.repository.cdi.Eager;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ForkJoinWorkerThread;
 
 @Entity
 @Table(name = "instructor")
@@ -30,8 +35,10 @@ public class Instructor {
     // following exist "mapped by" property and its value
     // refers to 'instructor' property in 'course' class
     @OneToMany(mappedBy = "instructor",
-            cascade = {CascadeType.DETACH, CascadeType.PERSIST,
+               //fetch = FetchType.EAGER,
+               cascade = {CascadeType.DETACH, CascadeType.PERSIST,
                           CascadeType.MERGE, CascadeType.REFRESH})
+
     private List<Course> courses;
 
     public void add (Course tempCourse){

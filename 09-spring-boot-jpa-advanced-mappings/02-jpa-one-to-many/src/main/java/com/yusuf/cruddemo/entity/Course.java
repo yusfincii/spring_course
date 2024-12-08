@@ -1,6 +1,7 @@
 package com.yusuf.cruddemo.entity;
 
 import jakarta.persistence.*;
+import org.springframework.data.repository.cdi.Eager;
 
 @Entity
 @Table(name="course")

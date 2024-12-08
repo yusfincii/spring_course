@@ -9,6 +9,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import java.util.List;
+
 @SpringBootApplication
 public class CruddemoApplication {
 
@@ -24,9 +26,45 @@ public class CruddemoApplication {
 			//deleteInstructor(appDAO);
 			//findInstructorDetail(appDAO);
 			//deleteInstructorDetail(appDAO);
-			createInstructorWithCourses(appDAO);
-
+			//createInstructorWithCourses(appDAO);
+			//findInstructorWithCourses(appDAO);
+			//findCourseInstructor(appDAO);
+			findCoursesByInstructorId(appDAO);
 		};
+	}
+
+	// method with LAZY -as default fetch type
+	private void findCoursesByInstructorId(AppDAO appDAO) {
+		int theId = 1;
+		Instructor instructor = appDAO.findInstructorById(theId);
+		System.out.println("Instructor: " + instructor.getFirst_name());
+
+		List<Course> courses = appDAO.findCoursesByInstructorId(theId);
+
+		// associate the objects
+		instructor.setCourses(courses);
+		System.out.println("Courses: " + instructor.getCourses());
+
+	}
+
+	private void findCourseInstructor(AppDAO appDAO) {
+		int theId = 1;
+		Course course = appDAO.findCourse(theId);
+		System.out.println("Course : " + course.getTitle());
+		System.out.println("Course instructor : " + course.getInstructor().getFirst_name());
+
+
+	}
+
+	// method with EAGER fetch type
+	private void findInstructorWithCourses(AppDAO appDAO) {
+		int theId = 1;
+		Instructor tempInstructor = appDAO.findInstructorById(theId);
+		System.out.println("Instructor: " + tempInstructor);
+
+		System.out.println("Courses: " + tempInstructor.getCourses());
+		System.out.println("Done!");
+
 	}
 
 	private void createInstructorWithCourses(AppDAO appDAO) {
