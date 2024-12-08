@@ -70,4 +70,14 @@ public class AppDAOImpl implements AppDAO{
         // find and remove
         entityManager.remove(entityManager.find(InstructorDetail.class, theId));
     }
+
+    @Override
+    public Instructor findInstructorByIdJoinFetch(int theId){
+        TypedQuery<Instructor> query = entityManager.createQuery("SELECT i from Instructor as i "+
+                "JOIN FETCH i.courses WHERE i.id=:data", Instructor.class);
+        query.setParameter("data", theId);
+
+        Instructor instructor = query.getSingleResult();
+        return instructor;
+    }
 }

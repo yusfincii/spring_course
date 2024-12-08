@@ -29,8 +29,19 @@ public class CruddemoApplication {
 			//createInstructorWithCourses(appDAO);
 			//findInstructorWithCourses(appDAO);
 			//findCourseInstructor(appDAO);
-			findCoursesByInstructorId(appDAO);
+			//findCoursesByInstructorId(appDAO);
+			findInstructorWithCoursesJoinFetch(appDAO);
 		};
+	}
+
+	// do not need EAGER fetch type via sql
+	private void findInstructorWithCoursesJoinFetch(AppDAO appDAO) {
+		int theId = 1;
+		Instructor instructor = appDAO.findInstructorByIdJoinFetch(theId);
+		System.out.println(instructor.toString());
+
+		// associate objects - instructor & courses
+		System.out.println(instructor.getCourses());
 	}
 
 	// method with LAZY -as default fetch type
