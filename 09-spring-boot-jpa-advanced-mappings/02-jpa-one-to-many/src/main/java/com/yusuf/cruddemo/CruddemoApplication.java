@@ -31,12 +31,31 @@ public class CruddemoApplication {
 			//findCourseInstructor(appDAO);
 			//findCoursesByInstructorId(appDAO);
 			//findInstructorWithCoursesJoinFetch(appDAO);
-			//updateInstructorById(appDAO);
-			updateCourseById(appDAO);
+			//updateInstructor(appDAO);
+			//updateCourse(appDAO);
+			//deleteInstructorWithRemoveAssociatedCourses(appDAO);
+			deleteCourse(appDAO);
 		};
 	}
 
-	private void updateCourseById(AppDAO appDAO) {
+	private void deleteCourse(AppDAO appDAO) {
+		int theId = 1;
+		Course course = appDAO.findCourse(theId);
+		System.out.println("The course will be delete: " + course);
+
+		appDAO.deleteCourse(theId);
+	}
+
+	private void deleteInstructorWithRemoveAssociatedCourses(AppDAO appDAO){
+		int theId = 1;
+
+		Instructor instructor = appDAO.findInstructorById(theId);
+		System.out.println("Instructor who will be delete : " + instructor);
+
+		appDAO.deleteInstructorWithAssociatedCourse(theId);
+	}
+
+	private void updateCourse(AppDAO appDAO) {
 		int theId = 1;
 		Course course = appDAO.findCourse(theId);
 		System.out.println("Course which will be update: " + course);
@@ -46,7 +65,7 @@ public class CruddemoApplication {
 		System.out.println("Updated course info: " + course);
 	}
 
-	private void updateInstructorById(AppDAO appDAO) {
+	private void updateInstructor(AppDAO appDAO) {
 		int theId = 1;
 		Instructor instructor = appDAO.findInstructorById(theId);
 		System.out.println("Instructor who will be update: " + instructor);
