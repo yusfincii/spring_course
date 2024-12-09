@@ -30,8 +30,30 @@ public class CruddemoApplication {
 			//findInstructorWithCourses(appDAO);
 			//findCourseInstructor(appDAO);
 			//findCoursesByInstructorId(appDAO);
-			findInstructorWithCoursesJoinFetch(appDAO);
+			//findInstructorWithCoursesJoinFetch(appDAO);
+			//updateInstructorById(appDAO);
+			updateCourseById(appDAO);
 		};
+	}
+
+	private void updateCourseById(AppDAO appDAO) {
+		int theId = 1;
+		Course course = appDAO.findCourse(theId);
+		System.out.println("Course which will be update: " + course);
+
+		course.setTitle("Electro Guitar");
+		appDAO.updateCourse(course);
+		System.out.println("Updated course info: " + course);
+	}
+
+	private void updateInstructorById(AppDAO appDAO) {
+		int theId = 1;
+		Instructor instructor = appDAO.findInstructorById(theId);
+		System.out.println("Instructor who will be update: " + instructor);
+
+		instructor.setLast_name("INCIx");
+		appDAO.updateInstructor(instructor);
+		System.out.println("Updated instructor: " + instructor);
 	}
 
 	// do not need EAGER fetch type via sql

@@ -4,6 +4,7 @@ import com.yusuf.cruddemo.entity.Course;
 import com.yusuf.cruddemo.entity.Instructor;
 import com.yusuf.cruddemo.entity.InstructorDetail;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.Table;
 import jakarta.persistence.TypedQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -79,5 +80,17 @@ public class AppDAOImpl implements AppDAO{
 
         Instructor instructor = query.getSingleResult();
         return instructor;
+    }
+
+    @Override
+    @Transactional
+    public void updateInstructor(Instructor instructor) {
+        entityManager.merge(instructor);
+    }
+
+    @Override
+    @Transactional
+    public void updateCourse(Course course){
+        entityManager.merge(course);
     }
 }
