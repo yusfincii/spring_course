@@ -14,6 +14,9 @@ public class Review {
     @Column(name = "comment")
     private String comment;
 
+    // Class doesn't have a review object and it's convenience annotations
+    // because the relation between course and review is unidirectional
+
     public Review(){}
 
     public Review(String comment) {

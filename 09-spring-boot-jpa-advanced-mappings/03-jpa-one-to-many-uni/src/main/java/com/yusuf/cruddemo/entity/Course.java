@@ -17,13 +17,16 @@ public class Course {
     @Column(name = "title")
     private String title;
 
+    // it doesn't want to remove a course when an instructor deleted
+    // so property not includes CascadeType.REMOVE
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE,
                           CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name = "instructor_id")
     private Instructor instructor;
 
+    // LAZY fetch type is more efficient
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "course_id")
+    @JoinColumn(name = "course_id") // foreign key
     private List<Review> reviews;
 
     public List<Review> getReviews() {

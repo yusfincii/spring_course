@@ -8,7 +8,8 @@ public class InstructorDetail {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @PrimaryKeyJoinColumn(name = "id")
+    @PrimaryKeyJoinColumn(name = "id") // connects to instructor's id field
+                                       // they shares same primary key
     private int id;
 
     @Column(name = "youtube_channel")
@@ -17,7 +18,8 @@ public class InstructorDetail {
     @Column(name = "hobby")
     private String hobby;
 
-    @OneToOne(mappedBy = "instructorDetail",
+    @OneToOne(mappedBy = "instructorDetail", // determines that instructor detail will manage relation
+                                             // among instructor and instructorDetail
             cascade = {CascadeType.DETACH, CascadeType.MERGE,
                     CascadeType.PERSIST, CascadeType.REFRESH})
     private Instructor instructor;

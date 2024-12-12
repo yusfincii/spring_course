@@ -29,11 +29,12 @@ public class Instructor {
     private String email;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "instructor_detail_id")
+    @JoinColumn(name = "instructor_detail_id") // foreign key
     private InstructorDetail instructorDetail;
 
     // following exist "mapped by" property and its value
     // refers to 'instructor' property in 'course' class
+    // also it determines relation will manage by instructor
     @OneToMany(mappedBy = "instructor",
                //fetch = FetchType.EAGER,
                cascade = {CascadeType.DETACH, CascadeType.PERSIST,
@@ -46,6 +47,7 @@ public class Instructor {
             courses = new ArrayList<>();
         }
         courses.add(tempCourse);
+        // ensure bidirectional relation
         tempCourse.setInstructor(this);
 
     }
