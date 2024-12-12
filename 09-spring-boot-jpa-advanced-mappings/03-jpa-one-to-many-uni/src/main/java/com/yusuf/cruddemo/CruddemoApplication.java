@@ -23,8 +23,20 @@ public class CruddemoApplication {
 	@Bean
 	public CommandLineRunner commandLineRunner(AppDAO appDAO){
 		return runner -> {
-			createCourseWithReviews(appDAO);
+			//createCourseWithReviews(appDAO);
+			retrieveCourseAndReviews(appDAO);
 		};
+	}
+
+	private void retrieveCourseAndReviews(AppDAO appDAO) {
+		int theId = 4;
+		Course course = appDAO.findCourseAndReviewsById(theId);
+		System.out.println(" --- " + course.getTitle() + " --- ");
+		for (Review review : course.getReviews()){
+			System.out.println(review.getId() + " - " + review.getComment());
+		}
+		// do not need that alter the review list of a
+		// course object's fetch type as EAGER
 	}
 
 	private void createCourseWithReviews(AppDAO appDAO) {
