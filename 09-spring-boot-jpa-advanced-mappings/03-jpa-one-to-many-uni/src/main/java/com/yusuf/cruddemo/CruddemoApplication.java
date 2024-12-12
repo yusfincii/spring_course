@@ -23,9 +23,19 @@ public class CruddemoApplication {
 	@Bean
 	public CommandLineRunner commandLineRunner(AppDAO appDAO){
 		return runner -> {
-			//createCourseWithReviews(appDAO);
-			retrieveCourseAndReviews(appDAO);
+			// createCourseWithReviews(appDAO);
+			// retrieveCourseAndReviews(appDAO);
+			deleteCourseAndReviews(appDAO);
 		};
+	}
+
+	private void deleteCourseAndReviews(AppDAO appDAO) {
+		int theId = 6;
+		System.out.println("Course which will be delete: " + appDAO.findCourse(theId).getTitle());
+		appDAO.deleteCourse(theId);
+		// reviews will be deleted automatically
+		// because of CascadeType.ALL
+		System.out.println("DONE !");
 	}
 
 	private void retrieveCourseAndReviews(AppDAO appDAO) {
