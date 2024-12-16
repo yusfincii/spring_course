@@ -3,6 +3,7 @@ package com.yusuf.cruddemo.dao;
 import com.yusuf.cruddemo.entity.Course;
 import com.yusuf.cruddemo.entity.Instructor;
 import com.yusuf.cruddemo.entity.InstructorDetail;
+import com.yusuf.cruddemo.entity.Student;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Table;
 import jakarta.persistence.TypedQuery;
@@ -122,5 +123,22 @@ public class AppDAOImpl implements AppDAO{
                 "join fetch c.reviews where c.id=:data", Course.class);
         query.setParameter("data", theId);
         return query.getSingleResult();
+    }
+
+    @Override
+    public Course findCourseAndStudentsById(int theId) {
+        TypedQuery<Course> query = entityManager.createQuery("from Course as c " +
+                "join fetch c.students where c.id=:data", Course.class);
+        query.setParameter("data", theId);
+        return query.getSingleResult();
+    }
+
+    @Override
+    public Student findStudentAndCourseById(int theId) {
+        TypedQuery<Student> query = entityManager.createQuery("from Student as s " +
+                "join fetch s.courses where s.id=:data", Student.class);
+        query.setParameter("data", theId);
+        return query.getSingleResult();
+
     }
 }

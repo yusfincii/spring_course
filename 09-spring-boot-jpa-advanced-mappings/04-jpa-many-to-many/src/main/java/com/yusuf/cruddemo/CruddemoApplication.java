@@ -1,10 +1,7 @@
 package com.yusuf.cruddemo;
 
 import com.yusuf.cruddemo.dao.AppDAO;
-import com.yusuf.cruddemo.entity.Course;
-import com.yusuf.cruddemo.entity.Instructor;
-import com.yusuf.cruddemo.entity.InstructorDetail;
-import com.yusuf.cruddemo.entity.Review;
+import com.yusuf.cruddemo.entity.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -23,8 +20,49 @@ public class CruddemoApplication {
 	@Bean
 	public CommandLineRunner commandLineRunner(AppDAO appDAO){
 		return runner -> {
-
+			// createCourseAndStudents(appDAO);
+			// retrieveCourseAndStudents(appDAO);
+			// retrieveStudentAndCourses(appDAO);
 		};
+	}
+
+	private void retrieveStudentAndCourses(AppDAO appDAO) {
+		int theId = 1;
+		Student student = appDAO.findStudentAndCourseById(theId);
+
+		System.out.println(" --- " + student.getFirst_name() + " - " + student.getLast_name() + " --- ");
+		for (Course courseX : student.getCourses()){
+			System.out.println(courseX.getTitle());
+		}
+		// do not need that alter the fetch type as EAGER of
+		// course list which belongs student class
+	}
+
+	private void retrieveCourseAndStudents(AppDAO appDAO) {
+		int theId = 10;
+		Course course = appDAO.findCourseAndStudentsById(theId);
+
+		System.out.println(" --- " + course.getTitle() + " --- ");
+		for (Student student : course.getStudents()){
+			System.out.println(student.getFirst_name() + " - " + student.getLast_name());
+		}
+		// do not need that alter the fetch type as EAGER of
+		// student list which belongs course class
+	}
+
+	private void createCourseAndStudents(AppDAO appDAO) {
+		Course course = new Course("Reed");
+
+		Student student1 = new Student("Yusuf", "INCI", "yusuf@gmail.com");
+		Student student2 = new Student("Ali", "AKAR", "ali@hotmail.com");
+
+		course.addStudent(student1);
+		course.addStudent(student2);
+
+		System.out.println("Course: " + course.getTitle());
+		System.out.println("Students: " + course.getStudents());
+		appDAO.save(course);
+		System.out.println(" --- DONE! ---");
 	}
 
 	private void deleteCourseAndReviews(AppDAO appDAO) {
