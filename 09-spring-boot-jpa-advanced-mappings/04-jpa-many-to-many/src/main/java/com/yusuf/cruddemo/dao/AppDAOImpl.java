@@ -141,4 +141,20 @@ public class AppDAOImpl implements AppDAO{
         return query.getSingleResult();
 
     }
+
+    @Override
+    @Transactional
+    public void updateStudent(Student student) {
+        entityManager.merge(student);
+    }
+
+    @Override
+    @Transactional
+    public void deleteStudentById(int theId) {
+        // following method can be suitable because if cascade types modified in classes
+        Student student = findStudentAndCourseById(theId);
+        // Student student = entityManager.find(Student.class, theId); // OPTIONAL
+        entityManager.remove(student);
+
+    }
 }

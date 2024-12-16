@@ -23,7 +23,33 @@ public class CruddemoApplication {
 			// createCourseAndStudents(appDAO);
 			// retrieveCourseAndStudents(appDAO);
 			// retrieveStudentAndCourses(appDAO);
+			// addMoreCoursesForAStudent(appDAO);
+			// deleteCourse(appDAO);
+			// deleteStudentById(appDAO);
 		};
+	}
+
+	private void deleteStudentById(AppDAO appDAO) {
+		int theId = 3;
+		appDAO.deleteStudentById(theId);
+	}
+
+	private void addMoreCoursesForAStudent(AppDAO appDAO) {
+		int theId = 3;
+		// related student
+		Student student = appDAO.findStudentAndCourseById(theId);
+
+		// course instances
+		Course course1 = new Course("Salsa");
+		//Course course2 = new Course("English Speaking");
+
+		student.addCourse(course1);
+		//student.addCourse(course2);
+
+		System.out.println("Updating student : " + student.getFirst_name() + " " + student.getLast_name());
+		System.out.println("Associated courses : " + student.getCourses()); // temporary case
+		appDAO.updateStudent(student);
+		System.out.println("DONE!");
 	}
 
 	private void retrieveStudentAndCourses(AppDAO appDAO) {
@@ -51,7 +77,7 @@ public class CruddemoApplication {
 	}
 
 	private void createCourseAndStudents(AppDAO appDAO) {
-		Course course = new Course("Reed");
+		Course course = new Course("Guitar");
 
 		Student student1 = new Student("Yusuf", "INCI", "yusuf@gmail.com");
 		Student student2 = new Student("Ali", "AKAR", "ali@hotmail.com");
@@ -105,7 +131,7 @@ public class CruddemoApplication {
 	}
 
 	private void deleteCourse(AppDAO appDAO) {
-		int theId = 1;
+		int theId = 11;
 		Course course = appDAO.findCourse(theId);
 		System.out.println("The course will be delete: " + course);
 
